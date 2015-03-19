@@ -80,14 +80,19 @@ Proof. reflexivity. Qed.
 
 Definition blt_nat (n m : nat) : bool :=
 match n with
-| (factorial n) (factorial m) => false
-| (factorial n) > (factorial m) => true
+| (factorial n) => 
+                 match m with
+                  |  
+|  => true
 end.
 
 Example test_blt_nat1:             (blt_nat 2 2) = false.
-(* FILL IN HERE *) Admitted.
+Eval simpl in (blt_nat 2 2)
+Proof. reflexivity. Qed.
 Example test_blt_nat2:             (blt_nat 2 4) = true.
-(* FILL IN HERE *) Admitted.
+Eval simpl in (blt_nat 2 4)
+Proof. reflexivity. Qed.
 Example test_blt_nat3:             (blt_nat 4 2) = false.
-(* FILL IN HERE *) Admitted.
+Eval simpl in (blt_nat 4 2)
+Proof. reflexivity. Qed.
 (** [] *)
