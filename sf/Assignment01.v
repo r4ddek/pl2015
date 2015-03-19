@@ -23,13 +23,17 @@ match b1 with
 end.
 
 Example test_andb31:                 (andb3 true true true) = true.
-Eval compute in (andb3 true true true). Admitted.
+Eval simpl in (andb3 true true true).
+Proof. reflexivity. Qed.
 Example test_andb32:                 (andb3 false true true) = false.
-Eval compute in (andb3 false true true). Admitted.
+Eval simpl in (andb3 false true true).
+Proof. reflexivity. Qed.
 Example test_andb33:                 (andb3 true false true) = false.
-Eval compute in (andb3 true false true). Admitted.
+Eval simpl in (andb3 true false true).
+Proof. reflexivity. Qed.
 Example test_andb34:                 (andb3 true true false) = false.
-Eval compute in (andb3 true true false). Admitted.
+Eval simpl in (andb3 true true false).
+Proof. reflexivity. Qed.
 (** [] *)
 
 
@@ -50,14 +54,17 @@ Eval compute in 3 * 5.
 Eval compute in 3+5*6.
 
 Fixpoint factorial (n:nat) : nat := 
- match n with
+match n with
 | 0 => 1
-| n  admit.
+| S n' => n * (factorial n')
+end.
 
 Example test_factorial1:          (factorial 3) = 6.
-(* FILL IN HERE *) Admitted.
+Eval simpl in (factorial 3).
+Proof. reflexivity. Qed.
 Example test_factorial2:          (factorial 5) = 10 * 12.
-(* FILL IN HERE *) Admitted.
+Eval simpl in (factorial 5).
+Proof. reflexivity. Qed.
 (** [] *)
 
 
@@ -72,7 +79,10 @@ Example test_factorial2:          (factorial 5) = 10 * 12.
     simple, elegant solution for which [simpl] suffices. *)
 
 Definition blt_nat (n m : nat) : bool :=
-  (* FILL IN HERE *) admit.
+match n with
+| (factorial n) (factorial m) => false
+| (factorial n) > (factorial m) => true
+end.
 
 Example test_blt_nat1:             (blt_nat 2 2) = false.
 (* FILL IN HERE *) Admitted.
