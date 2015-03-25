@@ -5,40 +5,27 @@
 
 Definition admit {T: Type} : T.  Admitted.
 
-(** **** Exercise: 1 star (andb3) *)
+(** **** Problem #1 : 1 star (andb3) *)
 (** Do the same for the [andb3] function below. This function should
     return [true] when all of its inputs are [true], and [false]
     otherwise. *)
 
 Definition andb3 (b1:bool) (b2:bool) (b3:bool) : bool :=
-match b1 with
-| false => false
-| true => match b2 with
-          | false => false
-          | true => match b3 with
-                    | false => false
-                    | true => true
-                    end
-          end
-end.
+  (* FILL IN HERE *) admit.
 
 Example test_andb31:                 (andb3 true true true) = true.
-Eval simpl in (andb3 true true true).
-Proof. reflexivity. Qed.
+(* FILL IN HERE *) Admitted.
 Example test_andb32:                 (andb3 false true true) = false.
-Eval simpl in (andb3 false true true).
-Proof. reflexivity. Qed.
+(* FILL IN HERE *) Admitted.
 Example test_andb33:                 (andb3 true false true) = false.
-Eval simpl in (andb3 true false true).
-Proof. reflexivity. Qed.
+(* FILL IN HERE *) Admitted.
 Example test_andb34:                 (andb3 true true false) = false.
-Eval simpl in (andb3 true true false).
-Proof. reflexivity. Qed.
+(* FILL IN HERE *) Admitted.
 (** [] *)
 
 
 
-(** **** Exercise: 1 star (factorial) *)
+(** **** Problem #2: 1 star (factorial) *)
 (** Recall the standard factorial function:
 <<
     factorial(0)  =  1 
@@ -54,45 +41,27 @@ Eval compute in 3 * 5.
 Eval compute in 3+5*6.
 
 Fixpoint factorial (n:nat) : nat := 
-match n with
-| 0 => 1
-| S n' => n * (factorial n')
-end.
+(* FILL IN HERE *) admit.
 
 Example test_factorial1:          (factorial 3) = 6.
-Eval simpl in (factorial 3).
-Proof. reflexivity. Qed.
+(* FILL IN HERE *) Admitted.
 Example test_factorial2:          (factorial 5) = 10 * 12.
-Eval simpl in (factorial 5).
-Proof. reflexivity. Qed.
+(* FILL IN HERE *) Admitted.
 (** [] *)
 
 
 
-(** **** Exercise: 2 stars (blt_nat) *)
+(** **** Problem #3: 2 stars (blt_nat) *)
 (** The [blt_nat] function tests [nat]ural numbers for [l]ess-[t]han,
-    yielding a [b]oolean.  Instead of making up a new [Fixpoint] for
-    this one, define it in terms of a previously defined function.  
-    
-    Note: If you have trouble with the [simpl] tactic, try using
-    [compute], which is like [simpl] on steroids.  However, there is a
-    simple, elegant solution for which [simpl] suffices. *)
+    yielding a [b]oolean.  Use [Fixpoint] to define it. *)
 
 Definition blt_nat (n m : nat) : bool :=
-match n with
-| (factorial n) => 
-                 match m with
-                  |  
-|  => true
-end.
+  (* FILL IN HERE *) admit.
 
 Example test_blt_nat1:             (blt_nat 2 2) = false.
-Eval simpl in (blt_nat 2 2)
-Proof. reflexivity. Qed.
+(* FILL IN HERE *) Admitted.
 Example test_blt_nat2:             (blt_nat 2 4) = true.
-Eval simpl in (blt_nat 2 4)
-Proof. reflexivity. Qed.
+(* FILL IN HERE *) Admitted.
 Example test_blt_nat3:             (blt_nat 4 2) = false.
-Eval simpl in (blt_nat 4 2)
-Proof. reflexivity. Qed.
+(* FILL IN HERE *) Admitted.
 (** [] *)
