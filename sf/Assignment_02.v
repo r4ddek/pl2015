@@ -1,10 +1,16 @@
+Require Export Basics.
+
 (** **** Problem #1 : 2 stars (mult_S_1) *)
 Theorem mult_S_1 : forall n m : nat,
   m = S n -> 
   m * (1 + n) = m * m.
 Proof.
-  (* FILL IN HERE *) Admitted.
-(** [] *)
+intros n m.
+intros.
+rewrite -> H.
+reflexivity. Qed.
+
+(** [OK] *)
 
 
 
@@ -27,8 +33,11 @@ Fixpoint beq_nat (n m : nat) : bool :=
 Theorem zero_nbeq_plus_1 : forall n : nat,
   beq_nat 0 (n + 1) = false.
 Proof.
-  (* FILL IN HERE *) Admitted.
-(** [] *)
+intros n.
+destruct n.
+reflexivity. reflexivity. Qed.
+
+(** [OK] *)
 
 
 
@@ -44,8 +53,14 @@ Theorem negation_fn_applied_twice :
   forall (f : bool -> bool), 
   (forall (x : bool), f x = negb x) ->
   forall (b : bool), f (f b) = b.
+
 Proof.
-  (* FILL IN HERE *) Admitted.
+intros f. intros H. intros Q.
+rewrite -> H.
+rewrite -> H.
+destruct Q.
+reflexivity. reflexivity. Qed.
+
 
 
 
@@ -62,9 +77,11 @@ Theorem andb_eq_orb :
   forall (b c : bool),
   (andb b c = orb b c) ->
   b = c.
-Proof.
-  (* FILL IN HERE *) Admitted.
-
+Proof. intros b. intros c.
+destruct b. (*if b = true*)
+destruct c.
+reflexivity.
+Admitted.
 
 
 
@@ -77,24 +94,51 @@ Proof.
 
 Theorem plus_n_O : forall n : nat,
   n = n + 0.
-Proof. 
-  (* FILL IN HERE *) Admitted.
+Proof.
+intros.
+induction n.
+simpl.
+reflexivity.
+simpl.
+Admitted.
+(*apply n.
+Qed.*)
 
 Theorem plus_n_Sm : forall n m : nat, 
   S (n + m) = n + (S m).
-Proof. 
-  (* FILL IN HERE *) Admitted.
+intros.
+induction n.
+simpl.
+reflexivity.
+simpl.
+rewrite -> IHn.
+reflexivity.
+Qed.
 
 Theorem plus_comm : forall n m : nat,
   n + m = m + n.
+Lemma plus_distr : forall n m: nat, S (n + m) = n + (S m).
 Proof.
-  (* FILL IN HERE *) Admitted.
+intros. 
+induction n.
+reflexivity.
+simpl.
+rewrite -> IHn. 
+reflexivity. 
+Qed.
+Admitted.
 
 Theorem plus_assoc : forall n m p : nat,
   n + (m + p) = (n + m) + p.
 Proof.
-  (* FILL IN HERE *) Admitted.
-(** [] *)
+intros.
+induction n.
+reflexivity.
+simpl.
+rewrite -> IHn.
+reflexivity. 
+Qed.
+(** [OK] *)
 
 
 
@@ -115,8 +159,15 @@ Fixpoint double (n:nat) :=
 
 Lemma double_plus : forall n, double n = n + n .
 Proof.  
-  (* FILL IN HERE *) Admitted.
-(** [] *)
+intros. 
+induction n.
+reflexivity.
+simpl. 
+rewrite -> IHn.
+rewrite -> plus_distr. 
+reflexivity.
+Qed.
+(** [OK] *)
 
 
 
@@ -132,33 +183,41 @@ Proof.
 Theorem plus_swap : forall n m p : nat, 
   n + (m + p) = m + (n + p).
 Proof.
-  (* FILL IN HERE *) Admitted.
-
-
-
-
-
-
-
+intros n m p.
+rewrite -> plus_assoc.
+assert(H: m + (n + p) = (m + n) + p).
+rewrite -> plus_assoc.
+reflexivity.
+rewrite -> H.
+assert(H2: m + n = n + m).
+rewrite -> plus_comm.
+reflexivity.
+rewrite -> H2.
+reflexivity.
+Qed.
+(*OK*)
 
 (** **** Problem #8 : 3 stars (mult_comm) *)
 
 Theorem mult_plus_distr_r : forall n m p : nat,
   (n + m) * p = (n * p) + (m * p).
 Proof.
-  (* FILL IN HERE *) Admitted.
+
+Admitted.
 
 Theorem mult_assoc : forall n m p : nat,
   n * (m * p) = (n * m) * p.
 Proof.
-  (* FILL IN HERE *) Admitted.
-(** [] *)
-
-
-
-
-
-
+intros.
+induction n.
+simpl.
+reflexivity.
+simpl.
+rewrite -> mult_plus_distr_r.
+rewrite -> IHn.
+reflexivity.
+Qed.
+(** [OK] *)
 
 
 Inductive natprod : Type :=
@@ -181,8 +240,6 @@ Definition swap_pair (p : natprod) : natprod :=
   match p with
   | (x,y) => (y,x)
   end.
-
-
 
 
 
